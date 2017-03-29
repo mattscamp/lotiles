@@ -4,9 +4,9 @@ Various shell scripts for throwing up a production like [tileserver](https://git
 
 ## Install
 
-1. `sudo bash provision.sh`
-2. Edit the tileserver config to run on port 3002
-3. Start the tileserver via GUnicorn or just manually via python.
+- `sudo bash provision.sh`
+- Edit the tileserver config to run on port 3002
+- Start the tileserver via GUnicorn or just manually via python
 
 ## Detailed
 
@@ -14,6 +14,5 @@ The tilerserver is run port 3002. Requests are routed to varnish on port 8080 wh
 
 ## TODO
 
-Automate tileserver config
-Automate GUnicorn
-More/better config options
+- Automate tileserver config and GUnicorn
+- Set up automated cacheing of tiles
