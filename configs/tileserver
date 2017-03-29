@@ -1,0 +1,17 @@
+upstream unicorn_tileserver {
+  server localhost:3002 fail_timeout=0;
+}
+
+server {
+  listen localhost:3001;
+
+  location /osm {
+    rewrite ^/osm/(.*) /$1 break;
+    proxy_pass http://unicorn_tileserver;
+  }
+
+  location / {
+    return 404 "Not Found";
+  }
+
+}
