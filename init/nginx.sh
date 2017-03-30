@@ -15,6 +15,6 @@ sudo apt-get install -qq nginx
 # Add vagrant user to www-data group
 usermod -a -G www-data vagrant
 
-sudo cp ./configs/tileserver  /etc/nginx/sites-available
-sudo cp ./configs/tile-cache  /etc/nginx/sites-available
+bash $SYNC_DIR/configs/tileserver.sh
+bash $SYNC_DIR/configs/tile-cache.sh
 sudo service nginx restart

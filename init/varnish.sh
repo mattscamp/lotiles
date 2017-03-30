@@ -10,5 +10,5 @@ sudo echo "deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.1" | sudo
 sudo apt-get update -y
 sudo apt-get install varnish -y
 
-sudo cp configs/default.vlc /etc/varnish/default.vcl
-sudo cp configs/varnish /etc/default/varnish
+bash $SYNC_DIR/configs/default.vlc.sh
+bash $SYNC_DIR/configs/varnish.sh

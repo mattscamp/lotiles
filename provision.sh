@@ -1,8 +1,6 @@
 #! /bin/sh
 
-. etc/parse_yaml.sh
-
-eval $(parse_yaml config.yaml "config_")
+. config.sh
 
 #
 # Install dependencies
@@ -17,11 +15,11 @@ bash ./init/redis.sh
 bash ./init/varnish.sh
 bash ./init/tileserver.sh
 
-cd ~
-mkdir osm2pgsql
-mkdir osmosis
-mkdir gunicorn
+mkdir $ROOT_DIR/osm2pgsql
+mkdir $ROOT_DIR/osmosis
+mkdir $ROOT_DIR/gunicorn
+mkdir $ROOT_DIR/tiles
 
-sudo cp $config_sync_directory/configs/osmosis ./osmosis/configuration.txt
+sudo cp /vagrant/configs/osmosis $ROOT_DIR/osmosis/configuration.txt
 
 echo "Finished"

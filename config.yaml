@@ -1,4 +1,0 @@
-sync_directory: /vagrant/
-postgres:
-  database: gis
-  user: osm

@@ -2,12 +2,10 @@
 
 echo ">>> Installing Tileserver"
 
-EXTRACT_URL=https://s3.amazonaws.com/metro-extracts.mapzen.com/bangkok_thailand.osm.pbf
-
 #
 # Clone datasource
 #
-cd ~
+cd $ROOT_DIR
 yes yes | git clone https://github.com/mapzen/vector-datasource.git
 (cd vector-datasource && git checkout tags/v1.2.0)
 
@@ -20,7 +18,7 @@ wget $EXTRACT_URL
 # Import the data using mapzen style
 #
 osm2pgsql -s -C 1024 -S vector-datasource/osm2pgsql.style -j bangkok_thailand.osm.pbf -d gis -U osm
-cd vector-datasource/data
+cd $ROOT_DIR/vector-datasource/data
 python bootstrap.py
 make -f Makefile-import-data
 ./import-shapefiles.sh | psql -d gis -U osm
@@ -30,29 +28,29 @@ make -f Makefile-import-data clean
 #
 # Install osm
 #
-cd ~
+cd $ROOT_DIR
 yes yes | git clone https://github.com/mapzen/tileserver.git
 (cd tileserver && git checkout tags/v1.4.0)
 sudo pip install -U -r tileserver/requirements.txt
-cd tileserver
+cd $ROOT_DIR/tileserver
 sudo python setup.py develop
 
 #
 # Install tilequeue
 #
-cd ~
+cd $ROOT_DIR
 yes yes | git clone https://github.com/tilezen/tilequeue.git
 (cd tilequeue && git checkout tags/v1.6.0)
-cd tilequeue
+cd $ROOT_DIR/tilequeue
 sudo python setup.py develop
 
-cd ~
-cd vector-datasource
+cd $ROOT_DIR/vector-datasource
 sudo python setup.py develop
 
 #
 # Set up config
 #
-cd ../tileserver
-sudo cp config.yaml.sample config.yaml
+cd $ROOT_DIR/tileserver
+bash $SYNC_DIR/configs/ts.sh
 sudo pip install gunicorn
+gunicorn -b 127.0.0.1:3002 "tileserver:wsgi_server('$ROOT_DIR/tileserver/config.yaml')" &

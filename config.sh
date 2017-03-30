@@ -1,0 +1,16 @@
+# Directories
+export SYNC_DIR="/vagrant"
+export ROOT_DIR="/home/vagrant"
+# Postgres
+export PG_USER="osm"
+export PG_DB="gis"
+# NGINX
+export NGINX_CACHE_PORT="3000"
+export NGINX_TILESERVER_PORT="3001"
+# Varnish
+export VARNISH_PORT="80"
+# GUnicorn
+export GUNICORN_PORT="3002"
+# Urls
+export EXTRACT_URL="https://s3.amazonaws.com/metro-extracts.mapzen.com/bangkok_thailand.osm.pbf"
+exec "$@"
