@@ -4,6 +4,7 @@ export ROOT_DIR="/home/vagrant"
 # Postgres
 export PG_USER="osm"
 export PG_DB="gis"
+export PG_PASS="gis"
 # NGINX
 export NGINX_CACHE_PORT="3000"
 export NGINX_TILESERVER_PORT="3001"

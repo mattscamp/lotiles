@@ -9,12 +9,12 @@ sudo add-apt-repository -y ppa:nginx/stable
 sudo apt-get update
 
 # Install Nginx
-# -qq implies -y --force-yes
 sudo apt-get install -qq nginx
 
 # Add vagrant user to www-data group
 usermod -a -G www-data vagrant
 
-bash $SYNC_DIR/configs/tileserver.sh
-bash $SYNC_DIR/configs/tile-cache.sh
+sudo bash $SYNC_DIR/configs/tileserver.sh
+sudo bash $SYNC_DIR/configs/tile-cache.sh
+sudo rm /etc/nginx/sites-available/default
 sudo service nginx restart

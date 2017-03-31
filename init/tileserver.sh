@@ -17,12 +17,13 @@ wget $EXTRACT_URL
 #
 # Import the data using mapzen style
 #
-osm2pgsql -s -C 1024 -S vector-datasource/osm2pgsql.style -j bangkok_thailand.osm.pbf -d gis -U osm
+export PGPASSWORD=PG_PASS
+osm2pgsql -s -C 1024 -S vector-datasource/osm2pgsql.style -j bangkok_thailand.osm.pbf -d $PG_DB -U $PG_USER
 cd $ROOT_DIR/vector-datasource/data
 python bootstrap.py
 make -f Makefile-import-data
-./import-shapefiles.sh | psql -d gis -U osm
-./perform-sql-updates.sh -d gis -U osm
+./import-shapefiles.sh | psql -d $PG_DB -U $PG_USER
+./perform-sql-updates.sh -d $PG_DB -U $PG_USER
 make -f Makefile-import-data clean
 
 #

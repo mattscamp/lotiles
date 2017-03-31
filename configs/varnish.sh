@@ -10,10 +10,10 @@ NFILES=131072
 # you need to increase this number as well
 MEMLOCK=82000
 
-DAEMON_OPTS=\"-a :$VARNISH_PORT \
-             -T localhost:6082 \
-             -f /etc/varnish/default.vcl \
-             -S /etc/varnish/secret \
+DAEMON_OPTS=\"-a :$VARNISH_PORT \\
+             -T localhost:6082 \\
+             -f /etc/varnish/default.vcl \\
+             -S /etc/varnish/secret \\
              -s malloc,256m\"
 
 
